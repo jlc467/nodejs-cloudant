@@ -76,7 +76,9 @@ function Cloudant(options, callback) {
 
   var nanoOptions = {
     log: (data) => {
-      debug('log from nano', getObjectToLog ? getObjectToLog(data) : data);
+      if (getObjectToLog) {
+        debug('log from nano %j', getObjectToLog(data));
+      }
     },
     parseUrl: false, // always return server object
     request: cloudantRequest,
