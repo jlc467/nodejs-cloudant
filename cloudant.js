@@ -45,7 +45,7 @@ function getCallback(opts, callback) {
 // This IS the Cloudant API. It is mostly nano, with a few functions.
 function Cloudant(options, callback) {
   debug('Initialize', options);
-
+  
   if (typeof options !== 'object') {
     options = { url: options };
   }
@@ -73,7 +73,9 @@ function Cloudant(options, callback) {
   };
 
   var nanoOptions = {
-    log: nanodebug,
+    log: (data) => {
+      debug('data log from nano', data);
+    },
     parseUrl: false, // always return server object
     request: cloudantRequest,
     url: creds.outUrl
